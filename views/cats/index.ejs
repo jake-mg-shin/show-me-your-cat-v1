@@ -1,0 +1,35 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+
+  <header class="jumbotron">
+    <div>
+      <h1>Welcome to <br>"Show Me Your Cat"!</h1>
+      <p>You can see most adorable cats in the world</p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="/cats/new">Upload Your Cat!</a class="btn btn-primary btn-lg">
+      </p>
+    </div>
+  </header>
+
+  <h3>Look at these cats!</h3>
+
+  <div class="row">
+    <% cats.forEach((cat)=>{ %>
+      <div class="col-lg-4 col-md-6">
+        <div class="card">
+          <img class="card-img-top" src="<%= cat.image %>" alt="" />
+          <div class="card-body">
+            <h4 class="card-title text-left"><%= cat.name %></h4>
+            <p class="text-right">
+              <a href="/cats/<%= cat._id %>" class="btn btn-primary">More</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+</div>
+
+<%- include("../partials/footer") %>
