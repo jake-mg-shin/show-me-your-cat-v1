@@ -48,9 +48,9 @@ app.use('/', indexRoutes);
 app.use('/cats', catRoutes);
 app.use('/cats/:id/comments', commentRoutes);
 
-app.listen(3000, () => {
-  console.log('The app server has started!!');
-});
-// app.listen(process.env.PORT, process.env.IP, () => {
+// app.listen(3000, () => {
 //   console.log('The app server has started!!');
 // });
+app.listen(process.env.PORT, process.env.IP, () => {
+  console.log('The app server has started!!');
+});
