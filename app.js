@@ -16,7 +16,22 @@ const commentRoutes = require('./routes/comments.js'),
   catRoutes = require('./routes/cats.js'),
   indexRoutes = require('./routes/index.js');
 
-mongoose.connect('mongodb://localhost/show_cat_v1');
+// mongoose.connect('mongodb://localhost/show_cat_v1');
+// using mongoDB Atlas instead of mongoDB localhost
+mongoose
+  .connect(
+    'mongodb+srv://jakeHeroku:jakeHeroku@cluster0-5vfhi.mongodb.net/test?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true
+    }
+  )
+  .then(() => {
+    console.log('connected to DB');
+  })
+  .catch(err => {
+    console.log('error:', err.message);
+  });
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
