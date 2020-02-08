@@ -2,45 +2,39 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <p class="lead">Show Me Your Cat</p>
-      <div class="list-group">
-        <li class="list-group-item active">Info 1</li>
-        <li class="list-group-item">Info 2</li>
-        <li class="list-group-item">Info 3</li>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <div class="card" style="width: 50rem;">
+    <div class="col-md-12">
+      <div id="margin-auto" class="card" style="width: 50rem;">
         <img class="card-img-top" src="<%= cats.image %>" alt="" />
         <div class="card-body">
           <h4 class="card-title"><%= cats.name %></h4>
           <p class="card-text"><%= cats.desc %></p>
-          <p class="card-text">
-            <em>Submitted by <%= cats.author.username %></em>
+          <p class="card-text text-right">
+            <em>Posted by <%= cats.author.username %></em>
           </p>
           <!--  -->
-          <% if(currentUser && cats.author.id.equals(currentUser._id)){ %>
-          <a class="btn btn-sm btn-warning" href="/cats/<%= cats._id %>/edit"
-            >Edit</a
-          >
-          <form
-            id="inline"
-            action="/cats/<%= cats._id %>?_method=DELETE"
-            method="POST"
-          >
-            <button class="btn btn-sm btn-danger">Delete</button>
-          </form>
-          <% } %>
+          <div class="text-right">
+            <% if(currentUser && cats.author.id.equals(currentUser._id)){ %>
+            <a class="btn btn-sm btn-dark" href="/cats/<%= cats._id %>/edit"
+              >Edit</a
+            >
+            <form
+              id="inline"
+              action="/cats/<%= cats._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button class="btn btn-sm btn-light">Delete</button>
+            </form>
+            <% } %>
+          </div>
           <!--  -->
         </div>
       </div>
       <br />
-      <div class="card" style="width: 50rem;">
+      <div id="margin-auto" class="card" style="width: 50rem;">
         <div class="card-header">
-          <p class="text-right">
-            <a class="btn btn-success" href="/cats/<%= cats._id %>/comments/new"
-              >Add new comment</a
+          <p class="text-left">
+            <a class="btn btn-info" href="/cats/<%= cats._id %>/comments/new"
+              >Add comment</a
             >
           </p>
           <hr />
@@ -53,6 +47,14 @@
               <p>
                 <%= comment.text %>
               </p>
+
+              <div class="text-right">
+                <a
+                  class="btn btn-sm btn-dark"
+                  href="/cats/<%= cats._id %>/comments/<%= comment._id%>/edit"
+                  >Edit</a
+                >
+              </div>
             </div>
           </div>
           <% }); %>
