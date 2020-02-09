@@ -3,6 +3,8 @@ const express = require('express'),
 
 const Cat = require('../models/cat.js');
 
+const middleware = require('../middleware/index.js');
+
 // index route: show all of cats
 router.get('/', (req, res) => {
   // get dbs of added cats
@@ -16,7 +18,7 @@ router.get('/', (req, res) => {
 });
 
 // create route: add new add cat to dbs
-router.post('/', isLoggedIn, (req, res) => {
+router.post('/', middleware.isLoggedIn, (req, res) => {
   // get data from form and cats arr
   const name = req.body.name,
     image = req.body.image,
@@ -40,7 +42,7 @@ router.post('/', isLoggedIn, (req, res) => {
 
 // new route: show create form
 // should be first before show route
-router.get('/new', isLoggedIn, (req, res) => {
+router.get('/new', middleware.isLoggedIn, (req, res) => {
   res.render('cats/new');
 });
 
@@ -61,26 +63,27 @@ router.get('/:id', (req, res) => {
 });
 
 // edit route
-router.get('/:id/edit', checkCatOwnership, (req, res) => {
+router.get('/:id/edit', middleware.checkCatOwnership, (req, res) => {
   Cat.findById(req.params.id, (err, foundCat) => {
     res.render('cats/edit', { cat: foundCat });
   });
 });
+
 // update route
-router.put('/:id', checkCatOwnership, (req, res) => {
+router.put('/:id', middleware.checkCatOwnership, (req, res) => {
   // find and update correct cat
   Cat.findByIdAndUpdate(req.params.id, req.body.cat, (err, updatedCat) => {
     if (err) {
       res.redirect('/cats');
     } else {
+      // redirect to show page
       res.redirect('/cats/' + req.params.id);
     }
   });
-  // redirect to show page
 });
 
 // destroy route
-router.delete('/:id', checkCatOwnership, (req, res) => {
+router.delete('/:id', middleware.checkCatOwnership, (req, res) => {
   Cat.findByIdAndRemove(req.params.id, err => {
     if (err) {
       res.redirect('/cats');
@@ -89,36 +92,5 @@ router.delete('/:id', checkCatOwnership, (req, res) => {
     }
   });
 });
-
-// middleware
-// logic is logged in
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
-
-function checkCatOwnership(req, res, next) {
-  // is user logged in?
-  if (req.isAuthenticated()) {
-    Cat.findById(req.params.id, (err, foundCat) => {
-      if (err) {
-        res.redirect('back');
-      } else {
-        // does user upload owned cat?
-        // => cat.author.id = mongoose object
-        // => req.user._id = string
-        if (foundCat.author.id.equals(req.user._id)) {
-          next();
-        } else {
-          res.redirect('back');
-        }
-      }
-    });
-  } else {
-    res.redirect('back');
-  }
-}
 
 module.exports = router;

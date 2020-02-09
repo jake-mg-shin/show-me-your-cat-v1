@@ -1,4 +1,9 @@
-/* show.ejs */
+/* /views/cats/index.ejs */
+span {
+  color: #f39c12;
+}
+
+/* views/cats/show.ejs */
 #margin-auto {
   margin-left: auto;
   margin-right: auto;
