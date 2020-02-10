@@ -1,11 +1,44 @@
-<%- include("partials/header") %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShowMeYourCat</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="/landing.css" />
+  </head>
 
-<h1>Landing page</h1>
+  <body>
+    <header>
+      <div id="notice">
+        <p>
+          <span id="opacity">
+            Images courtesy of
+            <a href="http://unsplash.com/">unsplash</a>
+          </span>
+        </p>
+      </div>
+      <div id="h2">
+        <h2>Jake's Show Me Your Cat Page</h2>
+      </div>
+    </header>
 
-<p>Welcome to "Show Me Your Cat"</p>
-
-<button class="btn btn-danger btn-lg">
-  <a href="/cats">View All Our Cats</a>
-</button>
-
-<%- include("partials/footer") %>
+    <div id="title">
+      <h1>Welcome!</h1>
+      <a href="/cats" class="btn btn-lg btn-outline-warning"
+        >Enter The Biggest Community of Cat Lovers in the World</a
+      >
+    </div>
+    <ul id="slider">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </body>
+</html>
