@@ -19,20 +19,6 @@ const commentRoutes = require('./routes/comments.js'),
 
 // mongoose.connect('mongodb://localhost/show_cat_v1');
 // using mongoDB Atlas instead of mongoDB localhost
-// mongoose
-//   .connect(
-//     'mongodb+srv://jakeHeroku:jakeHeroku@cluster0-5vfhi.mongodb.net/test?retryWrites=true&w=majority',
-//     {
-//       useNewUrlParser: true,
-//       useCreateIndex: true
-//     }
-//   )
-//   .then(() => {
-//     console.log('connected to DB');
-//   })
-//   .catch(err => {
-//     console.log('error:', err.message);
-//   });
 mongoose.connect(process.env.databaseURL);
 
 app.set('view engine', 'ejs');
